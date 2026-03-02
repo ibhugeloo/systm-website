@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark: #0f0f0f;
+  --color-orange: #F77331;
+  --color-orange-light: #f8935c;
+  --color-cream: #FFF9EB;
+  --color-cream-dark: #f5edd8;
+
+  --font-heading: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-dark);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background-color: var(--color-orange);
+  color: var(--color-dark);
+}
+
+/* ===========================
+   ANIMATION KEYFRAMES
+   =========================== */
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes starPop {
+  0% { opacity: 0; transform: scale(0); }
+  60% { transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================
+   SCROLL-REVEAL CLASSES
+   =========================== */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.anim-fade-in {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-in.is-visible {
+  opacity: 1;
+}
+
+.anim-scale-in {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-scale-in.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.anim-slide-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-slide-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.anim-slide-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-slide-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger delays */
+.anim-delay-100 { transition-delay: 100ms; }
+.anim-delay-200 { transition-delay: 200ms; }
+.anim-delay-300 { transition-delay: 300ms; }
+.anim-delay-400 { transition-delay: 400ms; }
+.anim-delay-500 { transition-delay: 500ms; }
+.anim-delay-600 { transition-delay: 600ms; }
+.anim-delay-700 { transition-delay: 700ms; }
+
+/* ===========================
+   HERO LOAD ANIMATIONS
+   =========================== */
+
+.anim-hero {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-mounted .anim-hero {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Continuous glow pulse */
+.anim-glow-pulse {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* Icon float on group hover */
+.group:hover .anim-icon-float {
+  animation: floatY 1.5s ease-in-out infinite;
+}
+
+/* Timeline draw */
+.anim-draw-line {
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-draw-line.is-visible {
+  transform: scaleY(1);
+}
+
+/* Progress bar fill */
+.anim-fill-bar {
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.is-visible .anim-fill-bar {
+  transform: scaleX(1);
+}
+
+/* Mobile menu */
+.anim-mobile-menu {
+  animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Star pop */
+.anim-star-pop {
+  opacity: 0;
+  transform: scale(0);
+  animation: starPop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ===========================
+   REDUCED MOTION
+   =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up, .anim-fade-in, .anim-scale-in,
+  .anim-slide-left, .anim-slide-right,
+  .anim-draw-line, .anim-fill-bar, .anim-hero {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .anim-glow-pulse, .anim-star-pop {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
