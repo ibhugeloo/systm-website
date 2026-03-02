@@ -72,8 +72,9 @@ export function Testimonials() {
 
           {/* Testimonial card */}
           <AnimateOnScroll animation="scale-in" delay={300}>
-            <div className="max-w-2xl mx-auto">
+            <div className="max-w-2xl mx-auto" role="region" aria-roledescription="carousel" aria-label="Témoignages clients">
               <div
+                aria-live="polite"
                 className={cn(
                   "rounded-2xl border border-cream/10 bg-cream/5 p-8 sm:p-10 transition-opacity duration-200",
                   transitioning ? "opacity-0" : "opacity-100"
@@ -121,6 +122,7 @@ export function Testimonials() {
           <div className="flex items-center justify-center gap-4 mt-8">
             <button
               onClick={prev}
+              aria-label="Avis précédent"
               className="w-10 h-10 rounded-full border border-cream/10 flex items-center justify-center text-cream/60 hover:border-orange hover:text-orange transition-colors cursor-pointer"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -137,6 +139,7 @@ export function Testimonials() {
             </div>
             <button
               onClick={next}
+              aria-label="Avis suivant"
               className="w-10 h-10 rounded-full border border-cream/10 flex items-center justify-center text-cream/60 hover:border-orange hover:text-orange transition-colors cursor-pointer"
             >
               <ChevronRight className="w-5 h-5" />

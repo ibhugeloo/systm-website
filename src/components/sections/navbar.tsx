@@ -53,6 +53,8 @@ export function Navbar() {
           <button
             className="md:hidden text-cream"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label="Menu de navigation"
+            aria-expanded={isOpen}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>

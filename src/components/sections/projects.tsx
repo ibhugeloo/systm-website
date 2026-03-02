@@ -85,6 +85,10 @@ export function Projects() {
 
         {/* Project showcase */}
         <div
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Nos projets"
+          aria-live="polite"
           className={cn(
             "grid lg:grid-cols-2 gap-12 items-center transition-opacity duration-200",
             transitioning ? "opacity-0" : "opacity-100"
@@ -148,6 +152,7 @@ export function Projects() {
         <div className="flex items-center justify-center gap-4 mt-12">
           <button
             onClick={prev}
+            aria-label="Projet précédent"
             className="w-10 h-10 rounded-full border border-cream/10 flex items-center justify-center text-cream/60 hover:border-orange hover:text-orange transition-colors cursor-pointer"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -166,6 +171,7 @@ export function Projects() {
           </div>
           <button
             onClick={next}
+            aria-label="Projet suivant"
             className="w-10 h-10 rounded-full border border-cream/10 flex items-center justify-center text-cream/60 hover:border-orange hover:text-orange transition-colors cursor-pointer"
           >
             <ChevronRight className="w-5 h-5" />

@@ -43,17 +43,23 @@ function FaqItem({
   answer,
   isOpen,
   toggle,
+  index,
 }: {
   question: string;
   answer: string;
   isOpen: boolean;
   toggle: () => void;
+  index: number;
 }) {
+  const answerId = `faq-answer-${index}`;
+
   return (
     <div className="border-b border-cream/5 last:border-0">
       <button
         onClick={toggle}
         className="w-full flex items-center justify-between py-6 text-left cursor-pointer group"
+        aria-expanded={isOpen}
+        aria-controls={answerId}
       >
         <span className="text-base sm:text-lg font-medium text-cream group-hover:text-orange transition-colors pr-4">
           {question}
@@ -66,6 +72,8 @@ function FaqItem({
         />
       </button>
       <div
+        id={answerId}
+        role="region"
         className={cn(
           "overflow-hidden transition-all duration-300 ease-out",
           isOpen ? "max-h-96 pb-6" : "max-h-0"
@@ -108,6 +116,7 @@ export function FAQ() {
             {faqs.map((faq, i) => (
               <FaqItem
                 key={i}
+                index={i}
                 question={faq.question}
                 answer={faq.answer}
                 isOpen={openIndex === i}

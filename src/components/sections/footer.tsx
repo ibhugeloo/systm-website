@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Phone, MessageCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
@@ -53,9 +54,17 @@ export function Footer() {
                 ))}
               </div>
             </div>
-            <p className="text-sm text-cream/30">
-              &copy; {new Date().getFullYear()} SYSTM.RE — Tous droits réservés
-            </p>
+            <div className="flex items-center gap-4 text-sm text-cream/30">
+              <p>
+                &copy; {new Date().getFullYear()} SYSTM.RE — Tous droits réservés
+              </p>
+              <Link
+                href="/mentions-legales"
+                className="hover:text-orange transition-colors"
+              >
+                Mentions légales
+              </Link>
+            </div>
           </div>
         </div>
       </AnimateOnScroll>

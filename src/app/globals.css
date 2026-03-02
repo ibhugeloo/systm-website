@@ -177,6 +177,16 @@ body {
    REDUCED MOTION
    =========================== */
 
+/* ===========================
+   FOCUS VISIBLE (Accessibility)
+   =========================== */
+
+:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .anim-fade-up, .anim-fade-in, .anim-scale-in,
   .anim-slide-left, .anim-slide-right,
