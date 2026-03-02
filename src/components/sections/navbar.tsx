@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -21,6 +22,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-18">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
+            <Image src="/logo.png" alt="" width={56} height={56} className="w-14 h-14" />
             <span className="text-2xl font-bold text-cream tracking-tight">
               SYSTM<span className="text-orange">.RE</span>
             </span>

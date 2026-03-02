@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, MessageCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
@@ -39,9 +40,12 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-6">
-              <span className="text-xl font-bold text-cream">
-                SYSTM<span className="text-orange">.RE</span>
-              </span>
+              <div className="flex items-center gap-2">
+                <Image src="/logo.png" alt="" width={56} height={56} className="w-14 h-14" />
+                <span className="text-xl font-bold text-cream">
+                  SYSTM<span className="text-orange">.RE</span>
+                </span>
+              </div>
               <div className="hidden sm:flex items-center gap-6">
                 {["Projets", "Services", "Avis", "FAQ"].map((item) => (
                   <a
