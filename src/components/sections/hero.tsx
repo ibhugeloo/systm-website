@@ -13,7 +13,7 @@ export function Hero() {
           src="/fond.gif"
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover opacity-[0.08] mix-blend-screen"
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.18] mix-blend-screen"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark/60 to-dark" />
       </div>

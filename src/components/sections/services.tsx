@@ -172,11 +172,11 @@ export function Services() {
                     </p>
 
                     {/* Illustration */}
-                    <div className="aspect-[16/10] rounded-xl border border-cream/5 mb-8 overflow-hidden">
+                    <div className="aspect-[16/10] rounded-xl border border-cream/5 mb-8 overflow-hidden bg-dark/60 flex items-center justify-center p-6">
                       <img
                         src={service.image}
                         alt={service.title}
-                        className="w-full h-full object-cover"
+                        className="max-w-full max-h-full object-contain"
                       />
                     </div>
 
