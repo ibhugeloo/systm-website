@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "@vercel/analytics";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CAL_URL } from "@/lib/constants";
 
 const navLinks = [
   { label: "Projets", href: "#projets" },
@@ -22,7 +24,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-18">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="" width={56} height={56} className="w-14 h-14" />
+            <Image src="/logo.png" alt="SYSTM.RE" width={56} height={56} className="w-14 h-14" />
             <span className="text-2xl font-bold text-cream tracking-tight">
               SYSTM<span className="text-orange">.RE</span>
             </span>
@@ -43,7 +45,7 @@ export function Navbar() {
 
           {/* CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <a href="https://cal.com/idriss-bhugeloo-qixrtx/30min" target="_blank" rel="noopener noreferrer">
+            <a href={CAL_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_click", { label: "navbar_cal" })}>
               <Button variant="default" size="default">
                 <Phone className="w-4 h-4" />
                 Réserver un appel
@@ -81,7 +83,7 @@ export function Navbar() {
                   {link.label}
                 </a>
               ))}
-              <a href="https://cal.com/idriss-bhugeloo-qixrtx/30min" target="_blank" rel="noopener noreferrer">
+              <a href={CAL_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_click", { label: "navbar_cal" })}>
                 <Button variant="default" size="default" className="w-full mt-2">
                   <Phone className="w-4 h-4" />
                   Réserver un appel

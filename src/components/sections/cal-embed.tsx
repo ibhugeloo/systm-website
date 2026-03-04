@@ -3,26 +3,39 @@
 import { useEffect, useState } from "react";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
-import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Loader2, ExternalLink } from "lucide-react";
+import { CAL_URL } from "@/lib/constants";
 
 export function CalEmbed() {
   const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (!loaded) setError(true);
+    }, 10000);
+
     (async function () {
-      const cal = await getCalApi({ namespace: "30min" });
-      cal("ui", {
-        theme: "dark",
-        styles: { branding: { brandColor: "#F77331" } },
-        hideEventTypeDetails: false,
-        layout: "month_view",
-      });
-      cal("on", {
-        action: "linkReady",
-        callback: () => setLoaded(true),
-      });
+      try {
+        const cal = await getCalApi({ namespace: "30min" });
+        cal("ui", {
+          theme: "dark",
+          styles: { branding: { brandColor: "#F77331" } },
+          hideEventTypeDetails: false,
+          layout: "month_view",
+        });
+        cal("on", {
+          action: "linkReady",
+          callback: () => setLoaded(true),
+        });
+      } catch {
+        setError(true);
+      }
     })();
-  }, []);
+
+    return () => clearTimeout(timeout);
+  }, [loaded]);
 
   return (
     <section id="rendez-vous" className="py-24 sm:py-32">
@@ -39,18 +52,34 @@ export function CalEmbed() {
 
         <AnimateOnScroll animation="scale-in" delay={200}>
           <div className="relative rounded-2xl border border-cream/10 bg-cream/5 overflow-hidden">
-            {!loaded && (
-              <div className="flex items-center justify-center gap-3 py-24 text-cream/40">
-                <Loader2 className="w-5 h-5 animate-spin" />
-                <span className="text-sm">Chargement du calendrier...</span>
+            {error ? (
+              <div className="flex flex-col items-center justify-center gap-4 py-24 text-center">
+                <p className="text-cream/50 text-sm">
+                  Le calendrier n&apos;a pas pu se charger.
+                </p>
+                <a href={CAL_URL} target="_blank" rel="noopener noreferrer">
+                  <Button variant="default">
+                    Réserver directement sur Cal.com
+                    <ExternalLink className="w-4 h-4" />
+                  </Button>
+                </a>
               </div>
+            ) : (
+              <>
+                {!loaded && (
+                  <div className="flex items-center justify-center gap-3 py-24 text-cream/40">
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span className="text-sm">Chargement du calendrier...</span>
+                  </div>
+                )}
+                <Cal
+                  namespace="30min"
+                  calLink="idriss-bhugeloo-qixrtx/30min"
+                  style={{ width: "100%", height: "100%", overflow: "scroll" }}
+                  config={{ layout: "month_view", theme: "dark" }}
+                />
+              </>
             )}
-            <Cal
-              namespace="30min"
-              calLink="idriss-bhugeloo-qixrtx/30min"
-              style={{ width: "100%", height: "100%", overflow: "scroll" }}
-              config={{ layout: "month_view", theme: "dark" }}
-            />
           </div>
         </AnimateOnScroll>
       </div>

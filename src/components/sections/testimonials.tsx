@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
 import { cn } from "@/lib/utils";
@@ -29,6 +29,7 @@ const testimonials = [
 export function Testimonials() {
   const [current, setCurrent] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
+  const touchStartX = useRef(0);
 
   const goTo = (nextIndex: number) => {
     if (transitioning) return;
@@ -66,7 +67,17 @@ export function Testimonials() {
 
           {/* Testimonial card */}
           <AnimateOnScroll animation="scale-in" delay={300}>
-            <div className="max-w-2xl mx-auto" role="region" aria-roledescription="carousel" aria-label="Témoignages clients">
+            <div
+              className="max-w-2xl mx-auto"
+              role="region"
+              aria-roledescription="carousel"
+              aria-label="Témoignages clients"
+              onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+              onTouchEnd={(e) => {
+                const delta = e.changedTouches[0].clientX - touchStartX.current;
+                if (Math.abs(delta) > 50) delta < 0 ? next() : prev();
+              }}
+            >
               <div
                 aria-live="polite"
                 className={cn(

@@ -11,13 +11,14 @@ interface Particle {
   opacity: number;
 }
 
-const PARTICLE_COUNT = 70;
+const PARTICLE_COUNT_DESKTOP = 70;
+const PARTICLE_COUNT_MOBILE = 30;
 const CONNECTION_DISTANCE = 180;
 const SPEED = 0.4;
 const ORANGE = { r: 247, g: 115, b: 49 };
 
-function createParticles(w: number, h: number): Particle[] {
-  return Array.from({ length: PARTICLE_COUNT }, () => ({
+function createParticles(w: number, h: number, count: number): Particle[] {
+  return Array.from({ length: count }, () => ({
     x: Math.random() * w,
     y: Math.random() * h,
     vx: (Math.random() - 0.5) * SPEED,
@@ -45,13 +46,15 @@ export function HeroParticles() {
     let h = 0;
     let particles: Particle[] = [];
     let animId: number;
+    const particleCount =
+      window.innerWidth < 768 ? PARTICLE_COUNT_MOBILE : PARTICLE_COUNT_DESKTOP;
 
     function resize() {
       w = canvas!.clientWidth;
       h = canvas!.clientHeight;
       canvas!.width = w;
       canvas!.height = h;
-      particles = createParticles(w, h);
+      particles = createParticles(w, h, particleCount);
     }
 
     function draw() {

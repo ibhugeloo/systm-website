@@ -1,7 +1,11 @@
+"use client";
+
+import { track } from "@vercel/analytics";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, MapPin, Briefcase } from "lucide-react";
 import { HeroAnimated } from "@/components/sections/hero-animated";
 import { HeroParticles } from "@/components/sections/hero-particles";
+import { CAL_URL, WHATSAPP_URL } from "@/lib/constants";
 
 export function Hero() {
   return (
@@ -16,26 +20,26 @@ export function Hero() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
           {/* Headline */}
           <h1 className="anim-hero text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
-            <span className="text-cream">Vous avez l&apos;idée,</span>
+            <span className="text-cream">Votre idée mérite</span>
             <br />
-            <span className="text-orange">on s&apos;occupe du reste</span>
+            <span className="text-orange">un lancement solide</span>
           </h1>
 
           {/* Subtitle */}
           <p className="anim-hero anim-delay-200 text-lg sm:text-xl text-cream/60 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Branding, landing pages et applications : nous accompagnons
-            entrepreneurs et entreprises du concept au lancement.
+            Landing pages, MVP et SaaS — nous aidons entrepreneurs et startups
+            à passer du concept au produit live, rapidement.
           </p>
 
           {/* CTA Buttons */}
           <div className="anim-hero anim-delay-300 flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <a href="https://cal.com/idriss-bhugeloo-qixrtx/30min" target="_blank" rel="noopener noreferrer">
+            <a href={CAL_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_click", { label: "hero_cal" })}>
               <Button size="lg" variant="default">
                 Réserver un appel gratuit
                 <ArrowRight className="w-5 h-5" />
               </Button>
             </a>
-            <a href="https://wa.me/262693473095" target="_blank" rel="noopener noreferrer">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_click", { label: "hero_whatsapp" })}>
               <Button size="lg" variant="outline">
                 <MessageCircle className="w-5 h-5" />
                 Discuter sur WhatsApp

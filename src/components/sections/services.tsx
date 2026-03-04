@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import {
   Plus,
   Minus,
+  MessageCircle,
   Globe,
   Rocket,
   Layers,
@@ -33,9 +34,29 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
+import { track } from "@vercel/analytics";
 import { cn } from "@/lib/utils";
+import { CAL_URL } from "@/lib/constants";
 
-const services = [
+interface InclusItemData {
+  icon: LucideIcon;
+  text: string;
+}
+
+interface Service {
+  title: string;
+  subtitle: string;
+  icon: LucideIcon;
+  image: string;
+  deliverables: string[];
+  gradient: string;
+  pourQui: string[];
+  inclus: InclusItemData[];
+  delai: string;
+  price: string;
+}
+
+const services: Service[] = [
   {
     title: "Landing Page",
     subtitle: "Une page premium conçue pour convertir.",
@@ -62,6 +83,7 @@ const services = [
       { icon: Sparkles, text: "Animations & Micro-interactions" },
     ],
     delai: "7–10 jours",
+    price: "À partir de 1 500€",
   },
   {
     title: "Sprint : MVP",
@@ -86,6 +108,7 @@ const services = [
       { icon: BarChart, text: "Analytics basique / logs" },
     ],
     delai: "3–6 semaines (selon complexité)",
+    price: "À partir de 4 000€",
   },
   {
     title: "Launch : SaaS",
@@ -111,6 +134,7 @@ const services = [
       { icon: GitBranch, text: "CI/CD + déploiement (staging + prod) + monitoring" },
     ],
     delai: "6–10+ semaines (selon complexité)",
+    price: "À partir de 8 000€",
   },
 ];
 
@@ -176,6 +200,7 @@ export function Services() {
                       <img
                         src={service.image}
                         alt={service.title}
+                        loading="lazy"
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -247,15 +272,33 @@ export function Services() {
                           ))}
                         </div>
 
-                        {/* DÉLAI */}
-                        <div className="bg-cream/5 rounded-xl p-4">
-                          <p className="text-cream/40 text-xs uppercase tracking-wider mb-1">
-                            Délai
-                          </p>
-                          <p className="text-cream font-bold text-lg">
-                            {service.delai}
-                          </p>
+                        {/* DÉLAI & PRIX */}
+                        <div className="grid grid-cols-2 gap-3 mb-6">
+                          <div className="bg-cream/5 rounded-xl p-4">
+                            <p className="text-cream/40 text-xs uppercase tracking-wider mb-1">
+                              Délai
+                            </p>
+                            <p className="text-cream font-bold text-lg">
+                              {service.delai}
+                            </p>
+                          </div>
+                          <div className="bg-cream/5 rounded-xl p-4">
+                            <p className="text-cream/40 text-xs uppercase tracking-wider mb-1">
+                              Tarif
+                            </p>
+                            <p className="text-orange font-bold text-lg">
+                              {service.price}
+                            </p>
+                          </div>
                         </div>
+
+                        {/* CTA */}
+                        <a href={CAL_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_click", { label: `service_${service.title}` })}>
+                          <Button variant="default" size="sm" className="w-full cursor-pointer">
+                            <MessageCircle className="w-4 h-4" />
+                            Discuter de ce projet
+                          </Button>
+                        </a>
                       </div>
                     </div>
                   </div>
