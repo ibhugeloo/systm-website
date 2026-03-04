@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
+import { useCarousel } from "@/hooks/use-carousel";
 import { cn } from "@/lib/utils";
 
 const testimonials = [
@@ -27,21 +27,8 @@ const testimonials = [
 ];
 
 export function Testimonials() {
-  const [current, setCurrent] = useState(0);
-  const [transitioning, setTransitioning] = useState(false);
-  const touchStartX = useRef(0);
-
-  const goTo = (nextIndex: number) => {
-    if (transitioning) return;
-    setTransitioning(true);
-    setTimeout(() => {
-      setCurrent(nextIndex);
-      setTransitioning(false);
-    }, 200);
-  };
-
-  const prev = () => goTo(current === 0 ? testimonials.length - 1 : current - 1);
-  const next = () => goTo(current === testimonials.length - 1 ? 0 : current + 1);
+  const { current, transitioning, prev, next, touchHandlers, keyboardHandler } =
+    useCarousel(testimonials.length);
 
   return (
     <section id="avis" className="py-24 sm:py-32">
@@ -72,11 +59,9 @@ export function Testimonials() {
               role="region"
               aria-roledescription="carousel"
               aria-label="Témoignages clients"
-              onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
-              onTouchEnd={(e) => {
-                const delta = e.changedTouches[0].clientX - touchStartX.current;
-                if (Math.abs(delta) > 50) delta < 0 ? next() : prev();
-              }}
+              tabIndex={0}
+              onKeyDown={keyboardHandler}
+              {...touchHandlers}
             >
               <div
                 aria-live="polite"

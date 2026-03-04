@@ -112,9 +112,16 @@ export function HeroParticles() {
       loop();
     }
 
-    window.addEventListener("resize", resize);
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    const debouncedResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 300);
+    };
+
+    window.addEventListener("resize", debouncedResize);
     return () => {
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", debouncedResize);
+      clearTimeout(resizeTimer);
       cancelAnimationFrame(animId);
     };
   }, []);

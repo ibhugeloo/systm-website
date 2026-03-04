@@ -7,6 +7,7 @@ import { Testimonials } from "@/components/sections/testimonials";
 import { FAQ } from "@/components/sections/faq";
 import { CalEmbed } from "@/components/sections/cal-embed";
 import { Footer } from "@/components/sections/footer";
+import { ErrorBoundary } from "@/components/ui/error-boundary";
 
 export default function Home() {
   return (
@@ -19,20 +20,36 @@ export default function Home() {
       </a>
       <main id="contenu" className="min-h-screen">
         <Navbar />
-        <Hero />
+        <ErrorBoundary>
+          <Hero />
+        </ErrorBoundary>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><hr className="border-cream/10" /></div>
-        <Projects />
+        <ErrorBoundary>
+          <Projects />
+        </ErrorBoundary>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><hr className="border-cream/10" /></div>
-        <Services />
+        <ErrorBoundary>
+          <Services />
+        </ErrorBoundary>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><hr className="border-cream/10" /></div>
-        <HowItWorks />
+        <ErrorBoundary>
+          <HowItWorks />
+        </ErrorBoundary>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><hr className="border-cream/10" /></div>
-        <Testimonials />
+        <ErrorBoundary>
+          <Testimonials />
+        </ErrorBoundary>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><hr className="border-cream/10" /></div>
-        <FAQ />
+        <ErrorBoundary>
+          <FAQ />
+        </ErrorBoundary>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><hr className="border-cream/10" /></div>
-        <CalEmbed />
-        <Footer />
+        <ErrorBoundary>
+          <CalEmbed />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Footer />
+        </ErrorBoundary>
       </main>
     </>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { track } from "@vercel/analytics";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,45 @@ const navLinks = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const handleEscape = useCallback(
+    (e: globalThis.KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) setIsOpen(false);
+    },
+    [isOpen]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [handleEscape]);
+
+  useEffect(() => {
+    if (!isOpen || !menuRef.current) return;
+    const focusable = menuRef.current.querySelectorAll<HTMLElement>(
+      "a, button"
+    );
+    if (focusable.length === 0) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    const trap = (e: globalThis.KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    first.focus();
+    document.addEventListener("keydown", trap);
+    return () => document.removeEventListener("keydown", trap);
+  }, [isOpen]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-dark/80 backdrop-blur-xl border-b border-cream/5">
@@ -66,6 +105,7 @@ export function Navbar() {
 
         {/* Mobile menu - animated */}
         <div
+          ref={menuRef}
           className={cn(
             "md:hidden overflow-hidden transition-all duration-300 ease-out",
             isOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"

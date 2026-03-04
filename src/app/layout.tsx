@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/next";
 import { JsonLd } from "@/components/json-ld";
+import { ConditionalAnalytics } from "@/components/ui/conditional-analytics";
+import { CookieBanner } from "@/components/ui/cookie-banner";
 import "./globals.css";
 
 const inter = Inter({
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
     "SYSTM.RE",
   ],
   robots: { index: true, follow: true },
+  other: { "theme-color": "#0f0f0f" },
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -61,8 +62,8 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         {children}
-        <SpeedInsights />
-        <Analytics />
+        <CookieBanner />
+        <ConditionalAnalytics />
       </body>
     </html>
   );

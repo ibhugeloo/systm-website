@@ -33,6 +33,7 @@ import {
   GitBranch,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import Image from "next/image";
 import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
 import { track } from "@vercel/analytics";
 import { cn } from "@/lib/utils";
@@ -196,12 +197,13 @@ export function Services() {
                     </p>
 
                     {/* Illustration */}
-                    <div className="aspect-square rounded-xl border border-cream/5 mb-8 overflow-hidden bg-dark/60">
-                      <img
+                    <div className="relative aspect-square rounded-xl border border-cream/5 mb-8 overflow-hidden bg-dark/60">
+                      <Image
                         src={service.image}
                         alt={service.title}
-                        loading="lazy"
-                        className="w-full h-full object-cover"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover"
                       />
                     </div>
 

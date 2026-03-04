@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
+import { useCarousel } from "@/hooks/use-carousel";
 import { cn } from "@/lib/utils";
 import {
   ArrowRight,
@@ -80,21 +80,8 @@ const projects: Project[] = [
 ];
 
 export function Projects() {
-  const [current, setCurrent] = useState(0);
-  const [transitioning, setTransitioning] = useState(false);
-  const touchStartX = useRef(0);
-
-  const goTo = (nextIndex: number) => {
-    if (transitioning) return;
-    setTransitioning(true);
-    setTimeout(() => {
-      setCurrent(nextIndex);
-      setTransitioning(false);
-    }, 200);
-  };
-
-  const prev = () => goTo(current === 0 ? projects.length - 1 : current - 1);
-  const next = () => goTo(current === projects.length - 1 ? 0 : current + 1);
+  const { current, transitioning, prev, next, touchHandlers, keyboardHandler } =
+    useCarousel(projects.length);
 
   const project = projects[current];
 
@@ -118,11 +105,9 @@ export function Projects() {
           aria-roledescription="carousel"
           aria-label="Nos projets"
           aria-live="polite"
-          onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
-          onTouchEnd={(e) => {
-            const delta = e.changedTouches[0].clientX - touchStartX.current;
-            if (Math.abs(delta) > 50) delta < 0 ? next() : prev();
-          }}
+          tabIndex={0}
+          onKeyDown={keyboardHandler}
+          {...touchHandlers}
           className={cn(
             "grid lg:grid-cols-2 gap-12 items-center transition-opacity duration-200",
             transitioning ? "opacity-0" : "opacity-100"
