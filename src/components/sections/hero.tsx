@@ -1,22 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, MapPin, Briefcase } from "lucide-react";
 import { HeroAnimated } from "@/components/sections/hero-animated";
+import { HeroParticles } from "@/components/sections/hero-particles";
 
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-18 overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-dark" />
-      {/* Animated background — subtle, blends into dark */}
-      <div className="absolute inset-0">
-        <img
-          src="/fond.gif"
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover opacity-[0.18] mix-blend-screen"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark/60 to-dark" />
-      </div>
+      {/* Animated particle background */}
+      <HeroParticles />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange/5 rounded-full blur-[120px] anim-glow-pulse" />
 
       <HeroAnimated>
