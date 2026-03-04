@@ -7,27 +7,21 @@ import { cn } from "@/lib/utils";
 
 const testimonials = [
   {
-    text: "SYSTM.RE m'a accompagné dans mon projet digital, entreprise très sérieuse et professionnelle, je la recommande !",
-    author: "Mario C.",
-    role: "Dirigeant, Fontaines VTC",
+    text: "SYSTM.RE a su comprendre mes besoins et créer un site à l'image de mon activité. Résultat professionnel et livraison rapide, je recommande !",
+    author: "Hugo M.",
+    role: "Fondateur, Goal Cleaning",
     rating: 5,
   },
   {
-    text: "Un accompagnement de A à Z, des livrables de qualité et une vraie écoute. Notre application a été livrée en avance sur le planning.",
-    author: "Sophie L.",
-    role: "Gérante, Island Flavors",
+    text: "SYSTM.RE a transformé mon idée en une vraie application fonctionnelle et design. L'équipe a parfaitement compris l'univers gaming, résultat au top !",
+    author: "Jeremy V.",
+    role: "Fondateur, LootLog",
     rating: 5,
   },
   {
-    text: "L'équipe comprend les enjeux business et traduit ça en solutions techniques solides. Je recommande vivement.",
-    author: "Thomas R.",
-    role: "CEO, ReunionTech",
-    rating: 5,
-  },
-  {
-    text: "Excellente collaboration, très professionnels et réactifs. Notre site web convertit maintenant 3x mieux qu'avant.",
-    author: "Julie M.",
-    role: "Fondatrice, Kréol Beauty",
+    text: "SYSTM.RE a conçu un portfolio qui me ressemble parfaitement. Le design est épuré, moderne et reflète exactement l'image que je voulais renvoyer. Un vrai plus pour ma crédibilité.",
+    author: "Idriss B.",
+    role: "Entrepreneur",
     rating: 5,
   },
 ];

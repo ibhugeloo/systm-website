@@ -40,6 +40,7 @@ const services = [
     title: "Landing Page",
     subtitle: "Une page premium conçue pour convertir.",
     icon: Globe,
+    image: "/landing-page.gif",
     deliverables: ["Landing page live", "Prêt à convertir"],
     gradient: "from-orange/10 via-transparent to-transparent",
     pourQui: [
@@ -66,6 +67,7 @@ const services = [
     title: "Sprint : MVP",
     subtitle: "Valider son produit en production.",
     icon: Rocket,
+    image: "/mvp.gif",
     deliverables: ["MVP en production", "Prêt à itérer"],
     gradient: "from-cream/5 via-transparent to-transparent",
     pourQui: [
@@ -89,6 +91,7 @@ const services = [
     title: "Launch : SaaS",
     subtitle: "Un produit complet, prêt à scaler.",
     icon: Layers,
+    image: "/saas.gif",
     deliverables: ["SaaS en production", "Prêt à scaler"],
     gradient: "from-orange/5 via-transparent to-transparent",
     pourQui: [
@@ -168,11 +171,13 @@ export function Services() {
                       {service.subtitle}
                     </p>
 
-                    {/* Illustration placeholder */}
-                    <div className="aspect-[16/10] rounded-xl bg-dark/60 border border-cream/5 mb-8 flex items-center justify-center overflow-hidden">
-                      <div className="w-full h-full bg-[radial-gradient(ellipse_at_center,rgba(247,115,49,0.1),transparent_70%)] flex items-center justify-center">
-                        <Icon className="w-12 h-12 text-cream/10" />
-                      </div>
+                    {/* Illustration */}
+                    <div className="aspect-[16/10] rounded-xl border border-cream/5 mb-8 overflow-hidden">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
 
                     {/* Deliverables */}
