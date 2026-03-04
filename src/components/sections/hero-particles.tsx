@@ -11,9 +11,9 @@ interface Particle {
   opacity: number;
 }
 
-const PARTICLE_COUNT = 50;
-const CONNECTION_DISTANCE = 150;
-const SPEED = 0.3;
+const PARTICLE_COUNT = 70;
+const CONNECTION_DISTANCE = 180;
+const SPEED = 0.4;
 const ORANGE = { r: 247, g: 115, b: 49 };
 
 function createParticles(w: number, h: number): Particle[] {
@@ -22,8 +22,8 @@ function createParticles(w: number, h: number): Particle[] {
     y: Math.random() * h,
     vx: (Math.random() - 0.5) * SPEED,
     vy: (Math.random() - 0.5) * SPEED,
-    radius: Math.random() * 1.5 + 0.5,
-    opacity: Math.random() * 0.3 + 0.3,
+    radius: Math.random() * 2 + 1,
+    opacity: Math.random() * 0.4 + 0.5,
   }));
 }
 
@@ -65,7 +65,7 @@ export function HeroParticles() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < CONNECTION_DISTANCE) {
-            const alpha = (1 - dist / CONNECTION_DISTANCE) * 0.15;
+            const alpha = (1 - dist / CONNECTION_DISTANCE) * 0.4;
             ctx!.strokeStyle = `rgba(${ORANGE.r},${ORANGE.g},${ORANGE.b},${alpha})`;
             ctx!.lineWidth = 0.5;
             ctx!.beginPath();
@@ -121,9 +121,9 @@ export function HeroParticles() {
       <canvas
         ref={canvasRef}
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full opacity-[0.15]"
+        className="absolute inset-0 w-full h-full"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark/60 to-dark" />
+      <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-transparent to-dark/80" />
     </div>
   );
 }
